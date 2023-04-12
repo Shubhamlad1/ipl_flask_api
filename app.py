@@ -30,4 +30,13 @@ def TeamStats():
     print(team_data)
     return jsonify(team_data)
 
+@app.route('/api/team_information')
+
+def Team_data_info():
+    team1= request.args.get('team1')
+
+    data= Team_information(team1)
+
+    return jsonify(data)
+
 app.run(debug=True, port=7000)

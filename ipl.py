@@ -27,3 +27,28 @@ def TeamToTeam(team1, team2):
   }
 
   return data_dict
+
+
+def Team_information(team_name1):
+  temp_df= ipl_data[(ipl_data['Team1']==team_name1) | (ipl_data['Team2']==team_name1)]
+  Total_Matches_played = temp_df.shape[0]
+
+  Total_Matches_Own = temp_df[temp_df['WinningTeam']==team_name1].shape[0]
+  Total_Matches_Loss = temp_df[temp_df['WinningTeam']!=team_name1].shape[0]
+  Draw = Total_Matches_played - (Total_Matches_Own +Total_Matches_Loss)
+
+  title_count = temp_df[temp_df['MatchNumber']== 'Final']['WinningTeam']==team_name1
+  count=0
+  for i in title_count:
+    if i == True:
+      count+=1
+  information_dict = {
+          "Total_Matches_played" : str(Total_Matches_played),
+          "Total_Matches_Own" : str(Total_Matches_Own),
+          "Total_Matches_Loss" : str(Total_Matches_Loss),
+          "Draw Matches" : str(Draw),
+          "Number of Tile Own": count
+      
+  }
+
+  return information_dict
