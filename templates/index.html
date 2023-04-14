@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API URLs</title>
+    <style>
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* Blog styles */
+        .blog {
+            margin-top: 30px;
+        }
+
+        .blog h2 {
+            margin-bottom: 10px;
+        }
+
+        .blog p {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>API URLs</h1>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>URL</th>
+        </tr>
+        <tr>
+            <td>Fetches Team Names</td>
+            <td><a onclick="fetchData('http://127.0.0.1:7000/api/team_names')">http://127.0.0.1:7000/api/team_names</a></td>
+        </tr>
+        <tr>
+            <td>Fetches Stats Between Team1 and Team2</td>
+            <td><a onclick="fetchData('http://127.0.0.1:7000/api/TeamToTeam/stat?team1=Chennai%20Super%20Kings&team2=Mumbai%20Indians')">http://127.0.0.1:7000/api/TeamToTeam/stat?team1=Chennai%20Super%20Kings&team2=Mumbai%20Indians</a></td>
+        </tr>
+        <tr>
+            <td>Fetches Stats of Single Team</td>
+            <td><a onclick="fetchData('http://127.0.0.1:7000/api/team_information?team1=Mumbai%20Indians')">http://127.0.0.1:7000/api/team_information?team1=Mumbai%20Indians</a></td>
+        </tr>
+        <tr>
+            <td>Fetches All Player Names Played In IPL</td>
+            <td><a onclick="fetchData('http://127.0.0.1:7000/api/player_list')">http://127.0.0.1:7000/api/player_list</a></td>
+        </tr>
+        <tr>
+            <td>Fetches Batting Stats of players </td>>
+            <td><a onclick="fetchData('http://127.0.0.1:7000/api/player_stats/batting?player_name=R%20Ashwin')">http://127.0.0.1:7000/api/player_stats/batting?player_name=R%20Ashwin</a></td>
+        </tr>
+
+    </table>
+
+    <div class="links">
+        <h2>Dataset Links Used In Project</h2>>
+        <p>
+            <li>2 IPL real world datasets has been used in this project.</li>
+            <li>1st Dataset contains information of all matches played in IPL</li>
+            <li>2nd Dataset contains ball by ball information of each player </li>
+        
+
+            <h2> Dataset 1 url </h2>
+            <li>https://docs.google.com/spreadsheets/d/e/2PACX-1vRy2DUdUbaKx_Co9F0FSnIlyS-8kp4aKv_I0-qzNeghiZHAI_hw94gKG22XTxNJHMFnFVKsO4xWOdIs/pub?gid=1655759976&single=true&output=csv</li>
+        
+
+            <h2>Dataset 2 url </h2>
+            <li>https://docs.google.com/spreadsheets/d/e/2PACX-1vRu6cb6Pj8C9elJc5ubswjVTObommsITlNsFy5X0EiBY7S-lsHEUqx3g_M16r50Ytjc0XQCdGDyzE_Y/pub?output=csv</li>
+
+        </p>
+
+    <div class="blog">
+        <h2>Teams</h2>
+        <p>
+            Here are some cricket teams from IPL:
+        </p>
+        <ul>
+            <li>Chennai Super Kings</li>
+            <li>Delhi Capitals</li>
+            <li>Pune Warriors</li>
+            <li>Punjab Kings</li>
+            <li>Rajasthan Royals</li>
+            <li>Kolkata Knight Riders</li>
+            <li>Kings XI Punjab</li>
+            <li>Rising Pune Supergiants</li>
+            <li>Delhi Daredevils</li>
+            <li>Deccan Chargers</li>
+            <li>Sunrisers Hyderabad</li>
+            <li>Mumbai Indians</li>
+            <li>Royal Challengers Bangalore</li>
+        </ul>
+    </div>
+
+    <script>
+        function fetchData(url) {
+            // Fetch data from the provided URL and handle the response
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Handle the data as needed
+                    console.log(data);
+                })
+                .catch(error => {
+                    // Handle any errors that occur during the fetch request
+                    console.error(error);
+                });
+        }
+    </script>
+</body>
+</html>

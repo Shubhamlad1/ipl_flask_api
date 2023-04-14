@@ -1,17 +1,11 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from ipl import *
 
 app= Flask(__name__)
 
 @app.route('/')
 def home():
-
-    text_data='''
-        Please Go through the below api's.
-        1. http://127.0.0.1:7000/api/team_names : Will return all team names in ipl.
-        2. Here another API will come
-        '''
-    return text_data
+    return render_template('index.html')
 
 @app.route('/api/team_names')
 def team_names():
@@ -31,12 +25,25 @@ def TeamStats():
     return jsonify(team_data)
 
 @app.route('/api/team_information')
-
 def Team_data_info():
     team1= request.args.get('team1')
 
     data= Team_information(team1)
 
     return jsonify(data)
+
+@app.route('/api/player_list')
+def players():
+    names= player_list()
+
+    return jsonify(names)
+
+@app.route('/api/player_stats/batting')
+def player_statistics():
+    name= request.args.get('player_name')
+
+    stats_ = Batsman_stats(name)
+
+    return jsonify(stats_)
 
 app.run(debug=True, port=7000)

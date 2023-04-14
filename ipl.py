@@ -3,7 +3,8 @@ import numpy as np
 
 
 ipl_data = pd.read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRy2DUdUbaKx_Co9F0FSnIlyS-8kp4aKv_I0-qzNeghiZHAI_hw94gKG22XTxNJHMFnFVKsO4xWOdIs/pub?gid=1655759976&single=true&output=csv")
-
+ipl_ball = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRu6cb6Pj8C9elJc5ubswjVTObommsITlNsFy5X0EiBY7S-lsHEUqx3g_M16r50Ytjc0XQCdGDyzE_Y/pub?output=csv"
+balls = pd.read_csv(ipl_ball)
 
 def Team_Names():
     Teams= list(set(list(ipl_data['Team1']) + list(ipl_data['Team2'])))
@@ -52,3 +53,39 @@ def Team_information(team_name1):
   }
 
   return information_dict
+
+
+def player_list():
+  players_list = list(set(list(list(balls['batter']) + list(balls['non-striker']))))
+
+  player_dict= {
+    'Players' : players_list
+  }
+
+  return player_dict
+
+
+def Batsman_stats(player_name): 
+  temp_df= balls[(balls['batter']== player_name)]
+  temp_df = temp_df[~(temp_df['extra_type']=='wides')]
+  top_score= temp_df.groupby('ID')['batsman_run'].sum().sort_values(ascending=False).head(1).values[0]
+  Match_runs = temp_df.groupby('ID')['batsman_run'].sum()
+  Total_Number_Sixes = temp_df[temp_df['batsman_run']==6].shape[0]
+  Total_Number_Fours = temp_df[temp_df['batsman_run']==4].shape[0]
+  Number_of_fifties= Match_runs[Match_runs >= 50].shape[0]
+  Number_of_Hundrades = Match_runs[Match_runs >= 100].shape[0]
+  Strike_Rate= (temp_df['batsman_run'].sum()/temp_df['ballnumber'].count())*100
+  Total_runs= temp_df['batsman_run'].sum() 
+
+  Batsman_stats = {
+      'Top_Score': str(top_score),
+      'Total_Number_Sixes' : str(Total_Number_Sixes),
+      'Total_Number_Fours' : str(Total_Number_Fours),
+      'Number_of_fifties' : str(Number_of_fifties),
+      'Number_of_Hundrades' : str(Number_of_Hundrades),
+      'Total_Runs': str(temp_df['batsman_run'].sum()),
+      'Strike_Rate': str(Strike_Rate)
+
+  }
+
+  return Batsman_stats
