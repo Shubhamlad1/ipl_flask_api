@@ -1,5 +1,8 @@
 # ipl_flask_api
 
+Links for the Dataset used in the project are mentioned below in the file. 
+Clone the project and run app.py file. Use below links to access all the stats releted to Teams and players in the IPL. 
+
 ## API URLs
 
 ## URL tofetch the data: 
